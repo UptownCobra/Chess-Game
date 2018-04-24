@@ -1,5 +1,5 @@
-struct coords
+/*struct coords
 {
 	int x;
 	int y;
-};
+};*/

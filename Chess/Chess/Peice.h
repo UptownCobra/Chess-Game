@@ -4,23 +4,28 @@
 #include "Cords.cpp"
 
 using namespace std;
+struct coords
+{
+	int x;
+	int y;
+};
 
 class Peice
 {
 public:
 	Peice();
-	Peice(string name, string team);
+	Peice(char team, string name);
 	~Peice();
-	coords * validMoves(coords init);
+//	coords * validMoves(coords init);
 	string getName() const;
-	string getTeam() const;
+	char getTeam() const;
 	void setName(string name);
-	void setTeam(string team);
+	void setTeam(char team);
 	void printPeice() const;
 
 private:
 	string name;
-	string team;
+	char team;
 	
 	
 };

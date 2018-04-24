@@ -4,7 +4,10 @@ class Queen :
 	public Peice
 {
 public:
-	Queen();
+	Queen(char);
 	~Queen();
+
+private:
+	char name = 'Q';
 };
 

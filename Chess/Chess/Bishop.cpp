@@ -2,11 +2,18 @@
 
 
 
-Bishop::Bishop()
+Bishop::Bishop(char t)
+	:Peice(t, "B ")
 {
+	
 }
 
 
 Bishop::~Bishop()
 {
+}
+ 
+void Bishop::setValidMooves(coords initPos, coords endPos)
+{
+
 }

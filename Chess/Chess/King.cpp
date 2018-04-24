@@ -2,7 +2,8 @@
 
 
 
-King::King()
+King::King(char t)
+	:Peice(t,"K ")
 {
 }
 

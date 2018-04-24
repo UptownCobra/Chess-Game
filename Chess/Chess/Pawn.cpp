@@ -2,7 +2,8 @@
 
 
 
-Pawn::Pawn()
+Pawn::Pawn(char t)
+	:Peice(t,"P ")
 {
 }
 

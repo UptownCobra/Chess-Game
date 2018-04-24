@@ -7,7 +7,10 @@ using namespace std;
 
 int main()
 {
-	
+	Board chessBoard;
+	chessBoard.print();
+
+	system("Pause");
 
 
 

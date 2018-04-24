@@ -2,7 +2,8 @@
 
 
 
-Queen::Queen()
+Queen::Queen(char t)
+	:Peice(t, "Q ")
 {
 }
 
