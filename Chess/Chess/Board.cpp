@@ -5,6 +5,7 @@
 Board::Board()
 {
 	init();
+	setPeiceCoords();
 }
 
 
@@ -17,7 +18,7 @@ void Board::init()
 {
 	char w = 'W';
 	char b = 'B';
-	Pawn wPawn(w),bPawn(b);
+	Pawn wPawn(w) ,bPawn(b);
 	Rook wRook(w), bRook(b);
 	Knight wKnight(w), bKnight(b);
 	Bishop wBishop(w), bBishop(b);
@@ -33,7 +34,7 @@ void Board::init()
 		{ Null, Null, Null, Null, Null, Null, Null, Null },
 		{ Null, Null, Null, Null, Null, Null, Null, Null },
 		{ bPawn, bPawn, bPawn, bPawn, bPawn, bPawn, bPawn, bPawn },
-		{ bRook, bKnight, bBishop, bQueen, bQueen, bBishop, bKnight, bRook },
+		{ bRook, bKnight, bBishop, bQueen, bKing, bBishop, bKnight, bRook },
 	};
 	setBoard(initBoard);
 	
@@ -94,6 +95,7 @@ void Board::setCoordsEnd(int x, int y)
 
 void Board::print() const
 {
+	system("cls");
 	for (int i = 0; i < 8; i++)
 	{
 		std::cout << "----------------------------------------------------------" << std::endl;
@@ -108,6 +110,24 @@ void Board::print() const
 	std::cout << "----------------------------------------------------------" << std::endl << std::endl;
 }
 
-void Board::movePiece(Peice toMove, coords init, coords end)
+void Board::movePiece(coords init, coords end)
 {
+	Peice x;
+	Peice Null;
+	x = getPeice(init);
+	board[init.x][init.y] = Null;
+	board[end.x][end.y] = x;
+}
+
+void Board::setPeiceCoords()
+{
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			Peice x = board[i][j];
+			x.setCoords(i, j);
+			board[i][j] = x;
+		}
+	}
 }

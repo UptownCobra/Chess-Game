@@ -13,7 +13,7 @@ Bishop::~Bishop()
 {
 }
  
-void Bishop::setValidMooves(coords initPos, coords endPos)
+void Bishop::setValidMooves(coords pos)
 {
 
 }

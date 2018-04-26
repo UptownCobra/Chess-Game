@@ -8,6 +8,8 @@ Pawn::Pawn(char t)
 }
 
 
+
+
 Pawn::~Pawn()
 {
 }

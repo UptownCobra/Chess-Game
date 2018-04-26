@@ -26,7 +26,8 @@ public:
 	void setCoordsInit(int x, int y);
 	void setCoordsEnd(int x, int y);
 	void print() const;
-	void movePiece(Peice toMove, coords init, coords end);
+	void movePiece(coords init, coords end);
+	void setPeiceCoords();
 	
 
 private:

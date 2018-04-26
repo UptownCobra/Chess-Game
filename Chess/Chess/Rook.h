@@ -4,10 +4,10 @@ class Rook :
 	public Peice
 {
 public:
+	
 	Rook(char);
 	~Rook();
-
+	
 private:
-	char name = 'R';
 };
 

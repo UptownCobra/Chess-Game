@@ -4,9 +4,10 @@ class Pawn :
 	public Peice
 {
 public:
+	
 	Pawn(char);
 	~Pawn();
+	
 private:
-	char name = 'P';
 };
 

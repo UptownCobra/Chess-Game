@@ -9,6 +9,7 @@ Knight::Knight(char new_team)
 }
 
 
+
 Knight::~Knight()
 {
 }
