@@ -4,7 +4,11 @@ class Knight :
 	public Peice
 {
 public:
-	Knight();
+	
+	Knight(char);
 	~Knight();
+	
+private:
+	
 };
 

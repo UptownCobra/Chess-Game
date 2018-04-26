@@ -4,8 +4,14 @@ class Bishop :
 	public Peice
 {
 public:
-	Bishop();
+
+	Bishop(char);
 	~Bishop();
+	
+	void setValidMooves(coords pos);
+private:
+	
+
 };
 
 

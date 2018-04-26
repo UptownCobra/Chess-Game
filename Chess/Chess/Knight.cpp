@@ -2,11 +2,16 @@
 
 
 
-Knight::Knight()
+Knight::Knight(char new_team)
+	:Peice(new_team, "Kn")
 {
+
 }
+
 
 
 Knight::~Knight()
 {
 }
+
+

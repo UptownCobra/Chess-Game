@@ -4,7 +4,10 @@ class King :
 	public Peice
 {
 public:
-	King();
+
+	King(char);
 	~King();
+	
+private:
 };
 

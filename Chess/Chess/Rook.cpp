@@ -2,7 +2,8 @@
 
 
 
-Rook::Rook()
+Rook::Rook(char t)
+	:Peice(t,"R ")
 {
 }
 
