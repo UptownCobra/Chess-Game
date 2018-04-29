@@ -1,5 +1,4 @@
 #pragma once
-#include<iostream>
 #include "Peice.h"
 #include "Cords.cpp"
 #include "Bishop.h"
@@ -16,8 +15,10 @@ public:
 	Board();
 	~Board();
 	void init();
+	bool getKingTaken() const;
 	Peice getPeice(coords init) const;
 	coords getCoords() const;
+	coords getInput();
 	void getMove();
 	bool moveIsValid(Peice toMove, coords init, coords end);
 	bool peiceToTake(coords end);
@@ -28,35 +29,13 @@ public:
 	void print() const;
 	void movePiece(coords init, coords end);
 	void setPeiceCoords();
+	void setkingTakenTrue();
 	
 
 private:
 	Peice board[8][8];
 	coords coordsInit;
 	coords coordsEnd;
-	/*Board() : wPawn('W');
-	Board() : bPawn('B');
-	Board() : wRook('W');
-	Board() : bRook('B');
-	Board() : wKnight('W');
-	Board() : bKnight('B');
-	Board() : wBishop('W');
-	Board() : bBishop('B');
-	Board() : wQueen('W'), bQueen('B');
-	Board() : wKing('W'), bKing('B');
-	Board() : Null();*/
-/*
-	Pawn wPawn;
-	Pawn bPawn;
-	Rook wRook;
-	Rook bRook;
-	Knight wKnight;
-	Knight bKnight;
-	Bishop wBishop;
-	Bishop bBishop;
-	Queen wQueen, bQueen;
-	King wKing, bKing;
-	Peice Null;
-	*/
+	bool kingTaken = false;
 };
 
