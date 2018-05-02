@@ -15,16 +15,22 @@ int main()
 	Board chessBoard;
 	bool boolTeam = false; //false = 'White'; true = 'Black'
 	bool isKingTaken = false;
-	chessBoard.print();
+	bool moveValid = false;
+	
 	
 
 	while (isKingTaken == false)
 	{
-
-		cout << strTeam << " what do you want to move (In te form A1): ";
-		toMove = chessBoard.getInput();
-		cout << endl << strTeam << " where would you like to move to (In te form A1): ";
-		moveTo = chessBoard.getInput();
+		bool moveValid = false;
+		while (!moveValid)
+		{
+			chessBoard.print();
+			cout << strTeam << " what do you want to move (In te form A1): ";
+			toMove = chessBoard.getInput();
+			cout << endl << strTeam << " where would you like to move to (In te form A1): ";
+			moveTo = chessBoard.getInput();
+			moveValid = chessBoard.moveIsValid(chessBoard.getPeice(toMove), moveTo);
+		}
 		chessBoard.movePiece(toMove, moveTo);
 		chessBoard.print();
 		boolTeam = !boolTeam;

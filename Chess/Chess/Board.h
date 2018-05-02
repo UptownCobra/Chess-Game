@@ -1,12 +1,7 @@
 #pragma once
 #include "Peice.h"
-#include "Cords.cpp"
-#include "Bishop.h"
-#include "King.h"
-#include "Knight.h"
-#include "Pawn.h"
-#include "Queen.h"
-#include "Rook.h"
+#include<algorithm>
+
 
 
 class Board
@@ -17,10 +12,10 @@ public:
 	void init();
 	bool getKingTaken() const;
 	Peice getPeice(coords init) const;
-	coords getCoords() const;
+//	coords getCoords() const;
 	coords getInput();
 	void getMove();
-	bool moveIsValid(Peice toMove, coords init, coords end);
+	bool moveIsValid(Peice toMove, coords end);
 	bool peiceToTake(coords end);
 	void setBoard(Peice initBoard[8][8]);
 	void takePeice(coords end);
@@ -31,6 +26,7 @@ public:
 	void setPeiceCoords();
 	void setkingTakenTrue();
 	
+
 
 private:
 	Peice board[8][8];

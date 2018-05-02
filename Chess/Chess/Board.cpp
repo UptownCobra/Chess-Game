@@ -18,16 +18,15 @@ void Board::init()
 {
 	char w = 'W';
 	char b = 'B';
-	Pawn wPawn(w) ,bPawn(b);
-	Rook wRook(w), bRook(b);
-	Knight wKnight(w), bKnight(b);
-	Bishop wBishop(w), bBishop(b);
-	King wKing(w), bKing(b);
-	Queen wQueen(w), bQueen(b);
+	Peice wPawn(w,"P ") ,bPawn(b, "P ");
+	Peice wRook(w, "R "), bRook(b, "R ");
+	Peice wKnight(w, "Kn"), bKnight(b, "Kn");
+	Peice wBishop(w, "B "), bBishop(b, "B ");
+	Peice wKing(w, "K "), bKing(b, "K ");
+	Peice wQueen(w, "Q "), bQueen(b, "Q ");
 	Peice Null;
-
 	Peice initBoard[8][8] = { 
-		{ wRook, wKnight, wBishop, wKing, wQueen, wBishop, wKnight, wRook },
+		{  wRook, wKnight, wBishop, wKing, wQueen, wBishop, wKnight, wRook },
 		{wPawn, wPawn, wPawn, wPawn, wPawn, wPawn, wPawn, wPawn },
 		{ Null, Null, Null, Null, Null, Null, Null, Null },
 		{ Null, Null, Null, Null, Null, Null, Null, Null },
@@ -55,12 +54,12 @@ Peice Board::getPeice(coords init) const
 {
 	return board[init.x][init.y];
 }
-
+/*
 coords Board::getCoords() const
 {
-	coords init{ 0,0 };
+	coords init;
 	return init;
-}
+}*/
 
 
 
@@ -69,9 +68,13 @@ void Board::getMove()
 
 }
 
-bool Board::moveIsValid(Peice toMove, coords init, coords end)
+bool Board::moveIsValid(Peice peice, coords end)
 {
-	return true;
+	bool valid = false;
+	if (find(peice.validMoves.begin(), peice.validMoves.end(), end) != peice.validMoves.end())
+		valid = true;
+	return valid;
+	
 }
 
 bool Board::peiceToTake(coords end)
@@ -143,9 +146,12 @@ void Board::movePiece(coords init, coords end)
 	Peice ending;
 	Peice Null;
 	starting = getPeice(init);
+	starting.setCoords(end.x, end.y);
+	starting.setValidMoves();
 	ending = getPeice(end);
 	board[init.x][init.y] = Null;
 	board[end.x][end.y] = starting;
+
 	if (ending.getName() == "K ")
 		setkingTakenTrue();
 	
@@ -159,6 +165,7 @@ void Board::setPeiceCoords()
 		{
 			Peice x = board[i][j];
 			x.setCoords(i, j);
+			x.setValidMoves();
 			board[i][j] = x;
 		}
 	}
