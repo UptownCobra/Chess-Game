@@ -18,7 +18,8 @@ void Board::init()
 {
 	char w = 'W';
 	char b = 'B';
-	Peice wPawn(w,"P ", board) ,bPawn(b, "P ", board);
+	Peice wPawn(w, "P ", board);
+	Peice bPawn(b, "P ", board);
 	Peice wRook(w, "R ", board), bRook(b, "R ", board);
 	Peice wKnight(w, "Kn", board), bKnight(b, "Kn", board);
 	Peice wBishop(w, "B ", board), bBishop(b, "B ", board);
