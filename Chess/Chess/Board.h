@@ -1,7 +1,10 @@
 #pragma once
+/*
 #include "Peice.h"
 #include<algorithm>
+*/
 
+#include "Peice.h"
 
 
 class Board
@@ -11,7 +14,7 @@ public:
 	~Board();
 	void init();
 	bool getKingTaken() const;
-	Peice getPeice(coords init) const;
+	Peice getPeice(coords init);
 //	coords getCoords() const;
 	coords getInput();
 	void getMove();
