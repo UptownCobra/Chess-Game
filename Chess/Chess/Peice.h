@@ -1,10 +1,10 @@
 #pragma once
+
 #include <string>
 #include <iostream>
 #include <vector>
 //#include "Board.h"
 #include "coords.h"
-
 using namespace std;
 
 
@@ -12,7 +12,7 @@ class Peice
 {
 public:
 	Peice();
-	Peice(char team, string name);
+	Peice(char team, string name, Peice p[8][8]);
 	~Peice();
 
 //	coords * validMoves(coords init);
@@ -33,8 +33,10 @@ public:
 	void setKingMoves  ();
 	void setQueenMoves ();
 	void setRookMoves  ();
+	
 
 private:
+	Peice* board;
 	string name;
 	char team;
 	coords coordinates;

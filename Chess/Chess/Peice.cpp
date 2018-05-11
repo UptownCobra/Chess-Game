@@ -8,10 +8,11 @@ Peice::Peice()
 	setTeam(' ');
 }
 
-Peice::Peice(char team, string name)
+Peice::Peice(char team, string name, Peice p[8][8])
 {
 	setName(name);
 	setTeam(team);
+	board = *p;
 	setCoords(NULL, NULL);
 
 }
@@ -70,6 +71,7 @@ void Peice::setValidMoves()
 {
 	string peice;
 	peice = getName();
+	validMoves.clear();
 	switch (peice[0])
 	{
 	case 'B':

@@ -18,12 +18,12 @@ void Board::init()
 {
 	char w = 'W';
 	char b = 'B';
-	Peice wPawn(w,"P ") ,bPawn(b, "P ");
-	Peice wRook(w, "R "), bRook(b, "R ");
-	Peice wKnight(w, "Kn"), bKnight(b, "Kn");
-	Peice wBishop(w, "B "), bBishop(b, "B ");
-	Peice wKing(w, "K "), bKing(b, "K ");
-	Peice wQueen(w, "Q "), bQueen(b, "Q ");
+	Peice wPawn(w,"P ", board) ,bPawn(b, "P ", board);
+	Peice wRook(w, "R ", board), bRook(b, "R ", board);
+	Peice wKnight(w, "Kn", board), bKnight(b, "Kn", board);
+	Peice wBishop(w, "B ", board), bBishop(b, "B ", board);
+	Peice wKing(w, "K ", board), bKing(b, "K ", board);
+	Peice wQueen(w, "Q ", board), bQueen(b, "Q ", board);
 	Peice Null;
 	Peice initBoard[8][8] = { 
 		{  wRook, wKnight, wBishop, wKing, wQueen, wBishop, wKnight, wRook },
@@ -50,7 +50,7 @@ void Board::setBoard(Peice initBoard[8][8])
 	}
 }
 
-Peice Board::getPeice(coords init) const
+Peice Board::getPeice(coords init) 
 {
 	return board[init.x][init.y];
 }
