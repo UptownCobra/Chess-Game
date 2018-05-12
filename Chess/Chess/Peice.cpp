@@ -8,11 +8,11 @@ Peice::Peice()
 	setTeam(' ');
 }
 
-Peice::Peice(char team, string name, Peice p[8][8])
+Peice::Peice(char team, string name/*, Peice p[8][8]*/)
 {
 	setName(name);
 	setTeam(team);
-	board = *p;
+//	board = *p;
 	setCoords(NULL, NULL);
 
 }
@@ -67,7 +67,7 @@ void Peice::setCoords(int x, int y)
 	
 
 }
-void Peice::setValidMoves()
+/*void Peice::setValidMoves()
 {
 	string peice;
 	peice = getName();
@@ -99,7 +99,7 @@ void Peice::setValidMoves()
 	if (peice == " P")
 		setPawnMoves();
 }
-
+*/
 Peice Peice::initSetCoords(int i, int j)
 {
 	Peice self = *this;
@@ -117,7 +117,7 @@ bool Peice::coordsValid(coords pos)
 	return i;
 }
 
-
+/*
 void Peice::setKnightMoves()
 {
 	coords pos;
@@ -147,7 +147,7 @@ void Peice::setKnightMoves()
 	}
 }
 void Peice::setPawnMoves  ()
-{/*
+{
 	coords pos;
 	coords newPos;
 	pos = coordinates;
@@ -172,7 +172,7 @@ void Peice::setPawnMoves  ()
 		if (coordsValid(newPos))
 			validMoves.push_back(newPos);
 	}
-	*/
+	
 }
 void Peice::setBishopMoves()
 {
@@ -190,3 +190,4 @@ void Peice::setRookMoves  ()
 {
 
 }
+*/

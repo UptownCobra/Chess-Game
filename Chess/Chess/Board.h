@@ -28,8 +28,13 @@ public:
 	void movePiece(coords init, coords end);
 	void setPeiceCoords();
 	void setkingTakenTrue();
-	
-
+	void setValidMove(Peice &);
+	void setKnightMoves(Peice &);
+	void setPawnMoves(Peice &);
+	void setBishopMoves(Peice &);
+	void setKingMoves(Peice &);
+	void setQueenMoves(Peice &);
+	void setRookMoves(Peice &);
 
 private:
 	Peice board[8][8];

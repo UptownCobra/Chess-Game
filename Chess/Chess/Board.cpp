@@ -18,13 +18,13 @@ void Board::init()
 {
 	char w = 'W';
 	char b = 'B';
-	Peice wPawn(w, "P ", board);
-	Peice bPawn(b, "P ", board);
-	Peice wRook(w, "R ", board), bRook(b, "R ", board);
-	Peice wKnight(w, "Kn", board), bKnight(b, "Kn", board);
-	Peice wBishop(w, "B ", board), bBishop(b, "B ", board);
-	Peice wKing(w, "K ", board), bKing(b, "K ", board);
-	Peice wQueen(w, "Q ", board), bQueen(b, "Q ", board);
+	Peice wPawn(w, "P ");
+	Peice bPawn(b, "P ");
+	Peice wRook(w, "R "), bRook(b, "R ");
+	Peice wKnight(w, "Kn"), bKnight(b, "Kn");
+	Peice wBishop(w, "B "), bBishop(b, "B ");
+	Peice wKing(w, "K "), bKing(b, "K ");
+	Peice wQueen(w, "Q "), bQueen(b, "Q ");
 	Peice Null;
 	Peice initBoard[8][8] = { 
 		{  wRook, wKnight, wBishop, wKing, wQueen, wBishop, wKnight, wRook },
@@ -148,7 +148,7 @@ void Board::movePiece(coords init, coords end)
 	Peice Null;
 	starting = getPeice(init);
 	starting.setCoords(end.x, end.y);
-	starting.setValidMoves();
+	setValidMove(starting);
 	ending = getPeice(end);
 	board[init.x][init.y] = Null;
 	board[end.x][end.y] = starting;
@@ -166,7 +166,7 @@ void Board::setPeiceCoords()
 		{
 			Peice x = board[i][j];
 			x.setCoords(i, j);
-			x.setValidMoves();
+			setValidMove(x);
 			board[i][j] = x;
 		}
 	}
@@ -175,6 +175,39 @@ void Board::setPeiceCoords()
 void Board::setkingTakenTrue()
 {
 	kingTaken = true;
+}
+
+void Board::setValidMove(Peice &peice)
+{
+	string peiceName;
+	peiceName = peice.getName();
+	peice.validMoves.clear();
+	switch (peiceName[0])
+	{
+	case 'B':
+		setBishopMoves(peice);
+		break;
+	case 'K':
+		if (peiceName == "Kn")
+		{
+			setKnightMoves(peice);
+			break;
+		}
+		else
+			setKingMoves(peice);
+		break;
+	case 'P':
+		setPawnMoves(peice);
+		break;
+	case 'Q':
+		setQueenMoves(peice);
+		break;
+	case 'R':
+		setRookMoves(peice);
+		break;
+	}
+	if (peiceName == " P")
+		setPawnMoves(peice);
 }
 
 bool Board::getKingTaken() const
@@ -259,4 +292,189 @@ coords Board::getInput()
 	}
 
 	return coordinates;
+}
+
+void Board::setKnightMoves(Peice &peice)
+{
+	coords pos;
+	coords newPos;
+	int y = 2;
+
+
+	pos = peice.getCoords();
+//	vector<Peice> moves;
+	for (int x = 1; x < 3; x++)
+	{
+		if (x == 2)
+			y = 1;
+		newPos.x = pos.x - x;
+		newPos.y = pos.y - y;
+		if (peice.coordsValid(newPos))
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		newPos.x = pos.x - x;
+		newPos.y = pos.y + y;
+		if (peice.coordsValid(newPos))
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		newPos.x = pos.x + x;
+		newPos.y = pos.y - y;
+		if (peice.coordsValid(newPos))
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		newPos.x = pos.x + x;
+		newPos.y = pos.y + y;
+		if (peice.coordsValid(newPos))
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+	}
+}
+void Board::setPawnMoves(Peice &peice)
+{
+	coords pos;
+	coords newPos;
+	pos = peice.getCoords();
+	Peice moveToPeice;
+	if (peice.getTeam() == 'B')
+	{
+		// Move straight ahead 1 space
+		newPos.x = pos.x - 1;
+		newPos.y = pos.y;
+		if (peice.coordsValid(newPos))
+		{
+			moveToPeice = board[newPos.x][newPos.y];
+			if (moveToPeice.getName() == "  ")
+				peice.validMoves.push_back(newPos);
+		}
+		//Move up 1 and to the left Only if there is a peice of the oposite team there
+		newPos.x = pos.x - 1;
+		newPos.y = pos.y - 1;
+		if (peice.coordsValid(newPos))
+		{
+			moveToPeice = board[newPos.x][newPos.y];
+			if (moveToPeice.getName() != "  ")
+				if (peice.getTeam() != this->getPeice(newPos).getTeam())
+					peice.validMoves.push_back(newPos);
+
+
+		}
+		//Move up 1 and to the Right Only if there is a peice of the oposite team there
+		newPos.x = pos.x - 1;
+		newPos.y = pos.y + 1;
+		if (peice.coordsValid(newPos))
+		{
+			moveToPeice = board[newPos.x][newPos.y];
+			if (moveToPeice.getName() != "  ")
+				if (peice.getTeam() != this->getPeice(newPos).getTeam())
+					peice.validMoves.push_back(newPos);
+
+
+		}
+	}
+	if (peice.getTeam() == 'W')
+	{
+		// Move straight ahead 1 space
+		newPos.x = pos.x + 1;
+		newPos.y = pos.y;
+		if (peice.coordsValid(newPos))
+		{
+			moveToPeice = board[newPos.x][newPos.y];
+			if (moveToPeice.getName() == "  ")
+				peice.validMoves.push_back(newPos);
+
+		}
+		//Move up 1 and to the left Only if there is a peice of the oposite team there
+		newPos.x = pos.x + 1;
+		newPos.y = pos.y - 1;
+		if (peice.coordsValid(newPos))
+		{
+			moveToPeice = board[newPos.x][newPos.y];
+			if (moveToPeice.getName() != "  ")
+				if (peice.getTeam() != this->getPeice(newPos).getTeam())
+					peice.validMoves.push_back(newPos);
+
+
+		}
+		//Move up 1 and to the Right Only if there is a peice of the oposite team there
+		newPos.x = pos.x + 1;
+		newPos.y = pos.y + 1;
+		if (peice.coordsValid(newPos))
+		{
+			moveToPeice = board[newPos.x][newPos.y];
+			if (moveToPeice.getName() != "  ")
+				if (peice.getTeam() != this->getPeice(newPos).getTeam())
+					peice.validMoves.push_back(newPos);
+		}
+
+	}
+}
+void Board::setBishopMoves(Peice &peice)
+{
+	coords pos;
+	coords newPos;
+	pos = peice.getCoords();
+	// up to the left
+	for (int i = 1; i < 8; i++)
+	{
+		newPos.x = pos.x + i;
+		newPos.y = pos.y + i;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+			if (this->getPeice(newPos).getName() != "  ")
+				break;
+		}
+	}
+	//up to the right
+	for (int i = 1; i < 8; i++)
+	{
+		newPos.x = pos.x + i;
+		newPos.y = pos.y - i;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+			if (this->getPeice(newPos).getName() != "  ")
+				break;
+		}
+	}
+	//down to the left
+	for (int i = 1; i < 8; i++)
+	{
+		newPos.x = pos.x - i;
+		newPos.y = pos.y + i;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+			if (this->getPeice(newPos).getName() != "  ")
+				break;
+		}
+	}
+	//down to the right
+	for (int i = 1; i < 8; i++)
+	{
+		newPos.x = pos.x - i;
+		newPos.y = pos.y - i;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+			if (this->getPeice(newPos).getName() != "  ")
+				break;
+		}
+	}
+}
+void Board::setKingMoves(Peice &piece)
+{
+
+}
+void Board::setQueenMoves(Peice &peice)
+{
+
+}
+void Board::setRookMoves(Peice &peice)
+{
+
 }

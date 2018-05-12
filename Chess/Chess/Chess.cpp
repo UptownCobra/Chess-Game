@@ -33,6 +33,7 @@ int main()
 			moveValid = chessBoard.moveIsValid(chessBoard.getPeice(toMove), moveTo);
 		}
 		chessBoard.movePiece(toMove, moveTo);
+		chessBoard.setPeiceCoords();
 		chessBoard.print();
 		boolTeam = !boolTeam;
 		isKingTaken = chessBoard.getKingTaken();

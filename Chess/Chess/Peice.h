@@ -12,7 +12,7 @@ class Peice
 {
 public:
 	Peice();
-	Peice(char team, string name, Peice p[8][8]);
+	Peice(char team, string name/*, Peice p[8][8]*/);
 	~Peice();
 
 //	coords * validMoves(coords init);
@@ -24,19 +24,19 @@ public:
 	void printPeice() const;
 	void setCoords(int,int);
 	Peice initSetCoords(int, int);
-	void setValidMoves();
+//	void setValidMoves();
 	bool coordsValid(coords);
 	vector<coords> validMoves;
-	void setKnightMoves();
-	void setPawnMoves  ();
-	void setBishopMoves();
-	void setKingMoves  ();
-	void setQueenMoves ();
-	void setRookMoves  ();
+//	void setKnightMoves();
+//	void setPawnMoves  ();
+//	void setBishopMoves();
+//	void setKingMoves  ();
+//	void setQueenMoves ();
+//	void setRookMoves  ();
 	
 
 private:
-	Peice* board;
+//	Peice* board;
 	string name;
 	char team;
 	coords coordinates;
