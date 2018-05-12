@@ -466,15 +466,138 @@ void Board::setBishopMoves(Peice &peice)
 		}
 	}
 }
-void Board::setKingMoves(Peice &piece)
+void Board::setKingMoves(Peice &peice)
 {
-
+	coords pos;
+	coords newPos;
+	pos = peice.getCoords();
+	//*************  DIAGONALS  *********************
+		newPos.x = pos.x + 1;
+		newPos.y = pos.y + 1;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		}
+	
+	//up to the right
+		newPos.x = pos.x + 1;
+		newPos.y = pos.y - 1;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		}
+	//down to the left
+		newPos.x = pos.x - 1;
+		newPos.y = pos.y + 1;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		}
+	//down to the right
+		newPos.x = pos.x - 1;
+		newPos.y = pos.y - 1;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		}
+		//***************** SIDE TO SIDE **********************
+		// Up/Down
+		newPos.x = pos.x + 1;
+		newPos.y = pos.y;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		}
+		// Up/Down
+		newPos.x = pos.x - 1;
+		newPos.y = pos.y;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		}
+		//Left/Right
+		newPos.x = pos.x;
+		newPos.y = pos.y + 1;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		}
+		//Left/Right
+		newPos.x = pos.x;
+		newPos.y = pos.y - 1;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+		}
 }
 void Board::setQueenMoves(Peice &peice)
 {
-
+	setRookMoves(peice);
+	setBishopMoves(peice);
 }
 void Board::setRookMoves(Peice &peice)
 {
-
+	coords pos;
+	coords newPos;
+	pos = peice.getCoords();
+	// up
+	for (int i = 1; i < 8; i++)
+	{
+		newPos.x = pos.x;
+		newPos.y = pos.y + i;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+			if (this->getPeice(newPos).getName() != "  ")
+				break;
+		}
+	}
+	//down
+	for (int i = 1; i < 8; i++)
+	{
+		newPos.x = pos.x;
+		newPos.y = pos.y - i;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+			if (this->getPeice(newPos).getName() != "  ")
+				break;
+		}
+	}
+	// to the left
+	for (int i = 1; i < 8; i++)
+	{
+		newPos.x = pos.x - i;
+		newPos.y = pos.y;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+			if (this->getPeice(newPos).getName() != "  ")
+				break;
+		}
+	}
+	// to the right
+	for (int i = 1; i < 8; i++)
+	{
+		newPos.x = pos.x + i;
+		newPos.y = pos.y;
+		if (peice.coordsValid(newPos))
+		{
+			if (peice.getTeam() != this->getPeice(newPos).getTeam())
+				peice.validMoves.push_back(newPos);
+			if (this->getPeice(newPos).getName() != "  ")
+				break;
+		}
+	}
 }
