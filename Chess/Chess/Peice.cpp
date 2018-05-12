@@ -8,10 +8,11 @@ Peice::Peice()
 	setTeam(' ');
 }
 
-Peice::Peice(char team, string name)
+Peice::Peice(char team, string name/*, Peice p[8][8]*/)
 {
 	setName(name);
 	setTeam(team);
+//	board = *p;
 	setCoords(NULL, NULL);
 
 }
@@ -63,18 +64,130 @@ void Peice::setCoords(int x, int y)
 {
 	coordinates.x = x;
 	coordinates.y = y;
-	setValidMoves();
+	
 
 }
-void Peice::setValidMoves()
+/*void Peice::setValidMoves()
 {
-
+	string peice;
+	peice = getName();
+	validMoves.clear();
+	switch (peice[0])
+	{
+	case 'B':
+		setBishopMoves();
+		break;
+	case 'K':
+		if (peice == "Kn")
+		{
+			setKnightMoves();
+			break;
+		}
+		else
+			setKingMoves();
+		break;
+	case 'P':
+		setPawnMoves();
+		break;
+	case 'Q':
+		setQueenMoves();
+		break;
+	case 'R':
+		setRookMoves();
+		break;
+	}
+	if (peice == " P")
+		setPawnMoves();
 }
-
+*/
 Peice Peice::initSetCoords(int i, int j)
 {
 	Peice self = *this;
 	self.setCoords(i, j);
-	self.setValidMoves();
 	return self;
 }
+bool Peice::coordsValid(coords pos)
+{
+	bool i = false;
+	if (pos.x < 8 && pos.x >= 0)
+	{
+		if (pos.y < 8 && pos.y >= 0)
+			i = true;
+	}
+	return i;
+}
+
+/*
+void Peice::setKnightMoves()
+{
+	coords pos;
+	coords newPos;
+	int y = 2;
+	pos = getCoords();
+	for (int x = 1; x < 3; x++)
+	{
+		if (x == 2)
+			y = 1;
+		newPos.x = pos.x - x;
+		newPos.y = pos.y - y;
+		if (coordsValid(newPos))
+			validMoves.push_back(newPos);
+		newPos.x = pos.x - x;
+		newPos.y = pos.y + y;
+		if (coordsValid(newPos))
+			validMoves.push_back(newPos);
+		newPos.x = pos.x + x;
+		newPos.y = pos.y - y;
+		if (coordsValid(newPos))
+			validMoves.push_back(newPos);
+		newPos.x = pos.x + x;
+		newPos.y = pos.y + y;
+		if (coordsValid(newPos))
+			validMoves.push_back(newPos);
+	}
+}
+void Peice::setPawnMoves  ()
+{
+	coords pos;
+	coords newPos;
+	pos = coordinates;
+	Peice* moveToPeice;
+	if (team == 'B')
+	{
+		newPos.x = pos.x - 1;
+		newPos.y = pos.y;
+		if (coordsValid(newPos))
+		{
+			moveToPeice = board[newPos.x][newPos.y];
+			if (moveToPeice->getName != "  ")
+				validMoves.push_back(newPos);
+		}
+
+
+	}
+	if (team == 'W')
+	{
+		newPos.x = pos.x + 1;
+		newPos.y = pos.y;
+		if (coordsValid(newPos))
+			validMoves.push_back(newPos);
+	}
+	
+}
+void Peice::setBishopMoves()
+{
+
+}
+void Peice::setKingMoves  ()
+{
+
+}
+void Peice::setQueenMoves ()
+{
+
+}
+void Peice::setRookMoves  ()
+{
+
+}
+*/
