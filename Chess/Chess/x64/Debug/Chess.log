@@ -1,2 +1,6 @@
 ﻿  Board.cpp
-  Chess.vcxproj -> C:\Users\CL055729\Desktop\Programing\Chess\Chess\x64\Debug\Chess.exe
+  Chess.cpp
+  coords.cpp
+  Peice.cpp
+  Generating Code...
+  Chess.vcxproj -> C:\Users\CL055729\Desktop\School\TestCPP\Chess-Game\Chess\x64\Debug\Chess.exe
